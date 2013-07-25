@@ -4,7 +4,7 @@
   <title><![CDATA[Category: test | seekpoint]]></title>
   <link href="http://r-plus.github.io/blog/categories/test/atom.xml" rel="self"/>
   <link href="http://r-plus.github.io/"/>
-  <updated>2013-07-26T00:56:20+09:00</updated>
+  <updated>2013-07-26T01:10:08+09:00</updated>
   <id>http://r-plus.github.io/</id>
   <author>
     <name><![CDATA[r_plus]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[引越し]]></title>
+    <link href="http://r-plus.github.io/blog/2013/07/26/yin-yue-si/"/>
+    <updated>2013-07-26T00:59:00+09:00</updated>
+    <id>http://r-plus.github.io/blog/2013/07/26/yin-yue-si</id>
+    <content type="html"><![CDATA[<ul>
+<li>markdownで書ける</li>
+<li>はてなブログだと広告出る</li>
+<li>Tumblrはmarkdownで書けるけどメールで送るってのがナンセンス</li>
+<li>Vimで書ける</li>
+</ul>
+
+
+<p>あたりの理由でBloggerから引越しました。めんどいので以前の記事はBloggerの方に放置で。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[test]]></title>
