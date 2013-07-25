@@ -1,16 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[seekpoint]]></title>
   <link href="http://r-plus.github.io/atom.xml" rel="self"/>
   <link href="http://r-plus.github.io/"/>
-  <updated>2013-07-23T03:48:34+09:00</updated>
+  <updated>2013-07-25T23:46:33+09:00</updated>
   <id>http://r-plus.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[r_plus]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[test]]></title>
+    <link href="http://r-plus.github.io/blog/2013/07/25/test/"/>
+    <updated>2013-07-25T20:22:00+09:00</updated>
+    <id>http://r-plus.github.io/blog/2013/07/25/test</id>
+    <content type="html"><![CDATA[<p>code test. <code>code</code></p>
+
+<pre><code>pre
+tag
+</code></pre>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>alloc
+</span><span class='line'>init</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>h1</h1>
+
+<h2>h2</h2>
+
+<h3>h3</h3>
+
+<h4>h4</h4>
+
+<h4>h5</h4>
+
+<ul>
+<li>list</li>
+</ul>
+
+]]></content>
+  </entry>
   
 </feed>
