@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: tweak | seekpoint]]></title>
+  <link href="http://r-plus.github.io/blog/categories/tweak/atom.xml" rel="self"/>
+  <link href="http://r-plus.github.io/"/>
+  <updated>2013-07-28T00:34:33+09:00</updated>
+  <id>http://r-plus.github.io/</id>
+  <author>
+    <name><![CDATA[r_plus]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[TimeStamp]]></title>
+    <link href="http://r-plus.github.io/blog/2013/07/28/timestamp/"/>
+    <updated>2013-07-28T00:02:00+09:00</updated>
+    <id>http://r-plus.github.io/blog/2013/07/28/timestamp</id>
+    <content type="html"><![CDATA[<p>最近終業時間をメモるためにカレンダーにその時間を登録しているので、そのショートカットとしてActivator用のtweakを作りました。</p>
+
+<p>TimeStamp <a href="https://github.com/r-plus/TimeStamp">https://github.com/r-plus/TimeStamp</a>   <br/>
+debも置いてあります。</p>
+
+<p>最近のgithubはrepo作成時にライセンス選ぶとライセンス本文ファイルとREADME.mdを生成してくれるんですね。ちなみにPublicDomainにしてみました。</p>
+]]></content>
+  </entry>
+  
+</feed>
