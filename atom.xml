@@ -4,7 +4,7 @@
   <title><![CDATA[seekpoint]]></title>
   <link href="http://r-plus.github.io/atom.xml" rel="self"/>
   <link href="http://r-plus.github.io/"/>
-  <updated>2013-07-28T00:34:32+09:00</updated>
+  <updated>2013-08-20T23:12:16+09:00</updated>
   <id>http://r-plus.github.io/</id>
   <author>
     <name><![CDATA[r_plus]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iproute2 instead of net-tools]]></title>
+    <link href="http://r-plus.github.io/blog/2013/08/20/iproute2-instead-of-net-tools/"/>
+    <updated>2013-08-20T23:00:00+09:00</updated>
+    <id>http://r-plus.github.io/blog/2013/08/20/iproute2-instead-of-net-tools</id>
+    <content type="html"><![CDATA[<p>メンテナンスされておらず、最早未来のないnet-toolsの代替であるiproute2での静的ルーティングの設定。</p>
+
+<p>■追加</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>route add -net 192.168.33.128/25 gw 192.168.10.1 eth0
+</span><span class='line'>ip route add 192.168.33.128/25 via 192.168.10.1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>■削除</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>route del -net 192.168.33.128/25 gw 192.168.10.1 eth0
+</span><span class='line'>ip route del 192.168.33.128
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[TimeStamp]]></title>
