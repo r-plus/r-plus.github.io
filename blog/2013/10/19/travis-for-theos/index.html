@@ -5,14 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>iproute2 instead of net-tools - seekpoint</title>
+  <title>Travis for THEOS - seekpoint</title>
   <meta name="author" content="r_plus">
 
   
-  <meta name="description" content="メンテナンスされておらず、最早未来のないnet-toolsの代替であるiproute2での静的ルーティングの設定。 ■追加 1
-2
-route add -net 192.168.33.128/25 gw 192.168.10.1 eth0
-ip route add 192.168.33.128/ &hellip;">
+  <meta name="description" content="普通にXcodeのプロジェクトに対してTravis CIでCIしているケースはよく見ますが、theos向けのものは見たことがないのでやってみました。 サンプルプロジェクト SwipeShiftCaret を使いました。 TravisのMac &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +18,7 @@ ip route add 192.168.33.128/ &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://r-plus.github.io/blog/2013/08/20/iproute2-instead-of-net-tools/">
+  <link rel="canonical" href="http://r-plus.github.io/blog/2013/10/19/travis-for-theos/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -79,7 +76,7 @@ ip route add 192.168.33.128/ &hellip;">
   <header>
     
       
-        <h1 class="entry-title">Iproute2 Instead of Net-tools</h1>
+        <h1 class="entry-title">Travis for THEOS</h1>
       
     
     
@@ -96,34 +93,39 @@ ip route add 192.168.33.128/ &hellip;">
   
 
 
-<time datetime="2013-08-20T23:00:00+09:00" pubdate data-updated="true">Aug 20<span>th</span>, 2013</time>
+<time datetime="2013-10-19T11:25:00+09:00" pubdate data-updated="true">Oct 19<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>メンテナンスされておらず、最早未来のないnet-toolsの代替であるiproute2での静的ルーティングの設定。</p>
+<div class="entry-content"><p>普通にXcodeのプロジェクトに対してTravis CIでCIしているケースはよく見ますが、theos向けのものは見たことがないのでやってみました。</p>
 
-<p>■追加</p>
+<h3>サンプルプロジェクト</h3>
 
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>route add -net 192.168.33.128/25 gw 192.168.10.1 eth0
-</span><span class='line'>ip route add 192.168.33.128/25 via 192.168.10.1
-</span></code></pre></td></tr></table></div></figure>
+<p><a href="https://github.com/r-plus/SwipeShiftCaret">SwipeShiftCaret</a> を使いました。</p>
 
+<p>TravisのMac VMは<code>homebrew</code>が使えますので<code>dpkg</code>をインストールし、theosを配備してやればビルド環境として整います。
+タイミングはapt-get等で環境をととのえるフェーズとして<code>before_install</code>があるため、そこで配備します。git submodule等があればそちらのコードもこのフェーズで取得すると良いでしょう(git cloneではサブモジュールまで取得されません)。</p>
 
-<p>■削除</p>
+<p>theosの配備についてはセットアップ及びライブラリ・ヘッダー更新用のスクリプトをTravis対応用にカレントディレクトリに展開するよう修正したものを使いました。</p>
 
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>route del -net 192.168.33.128/25 gw 192.168.10.1 eth0
-</span><span class='line'>ip route del 192.168.33.128
-</span></code></pre></td></tr></table></div></figure>
+<pre><code>before_install:
+  - brew update
+  - brew install dpkg
+  - curl https://raw.github.com/r-plus/dotfiles/master/install_theos.sh | bash
+</code></pre>
 
+<p>そして本命のビルドはmakeを流せば良いため</p>
 
+<pre><code>script:
+  - make
+</code></pre>
 
+<p>これでTravis上でビルド可能です。TravisとのServiceHookを有効にしたリポジトリで、これらを記述した<code>.travis.yml</code>をプッシュすれば以後はプッシュ毎、PullReq毎にCIが走ってくれます。</p>
+
+<p>リターンコードが0であればSuccessになり、晴れて <a href="https://travis-ci.org/r-plus/SwipeShiftCaret.png?branch=master">https://travis-ci.org/r-plus/SwipeShiftCaret.png?branch=master</a> のアイコン <img src="https://travis-ci.org/r-plus/SwipeShiftCaret.png?branch=master" alt="" /> がPassingになります、READMEにでも貼っておきましょう。</p>
 </div>
 
 <footer>
@@ -136,14 +138,14 @@ ip route add 192.168.33.128/ &hellip;">
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/iproute2/'>iproute2</a>
+    <a class='category' href='/blog/categories/travis-ci/'>Travis-CI</a>
   
 </span>
 
 
 <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/blog/2013/08/20/iproute2-instead-of-net-tools/" data-via="r_plus" data-counturl="http://r-plus.github.io/blog/2013/08/20/iproute2-instead-of-net-tools/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/blog/2013/10/19/travis-for-theos/" data-via="r_plus" data-counturl="http://r-plus.github.io/blog/2013/10/19/travis-for-theos/" >Tweet</a>
   
   
   
@@ -170,12 +172,12 @@ ip route add 192.168.33.128/ &hellip;">
   
 
 
-<time datetime="2013-08-20T23:00:00+09:00" pubdate data-updated="true">Aug 20<span>th</span>, 2013</time>
+<time datetime="2013-10-19T11:25:00+09:00" pubdate data-updated="true">Oct 19<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/iproute2/'>iproute2</a>
+    <a class='category' href='/blog/categories/travis-ci/'>Travis-CI</a>
   
 </span>
 
@@ -184,7 +186,7 @@ ip route add 192.168.33.128/ &hellip;">
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/blog/2013/08/20/iproute2-instead-of-net-tools/" data-via="r_plus" data-counturl="http://r-plus.github.io/blog/2013/08/20/iproute2-instead-of-net-tools/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/blog/2013/10/19/travis-for-theos/" data-via="r_plus" data-counturl="http://r-plus.github.io/blog/2013/10/19/travis-for-theos/" >Tweet</a>
   
   
   
@@ -193,10 +195,8 @@ ip route add 192.168.33.128/ &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left articlenav" href="/blog/2013/07/28/timestamp/" title="Previous Post: TimeStamp">&laquo; TimeStamp</a>
+        <a class="basic-alignment left articlenav" href="/blog/2013/08/20/iproute2-instead-of-net-tools/" title="Previous Post: iproute2 instead of net-tools">&laquo; iproute2 instead of net-tools</a>
       
-      
-        <a class="basic-alignment right articlenav" href="/blog/2013/10/19/travis-for-theos/" title="Next Post: Travis for THEOS">Travis for THEOS &raquo;</a>
       
     </p>
   </footer>

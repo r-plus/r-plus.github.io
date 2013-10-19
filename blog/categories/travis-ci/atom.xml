@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Travis-CI | seekpoint]]></title>
+  <link href="http://r-plus.github.io/blog/categories/travis-ci/atom.xml" rel="self"/>
+  <link href="http://r-plus.github.io/"/>
+  <updated>2013-10-19T12:06:13+09:00</updated>
+  <id>http://r-plus.github.io/</id>
+  <author>
+    <name><![CDATA[r_plus]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Travis for THEOS]]></title>
+    <link href="http://r-plus.github.io/blog/2013/10/19/travis-for-theos/"/>
+    <updated>2013-10-19T11:25:00+09:00</updated>
+    <id>http://r-plus.github.io/blog/2013/10/19/travis-for-theos</id>
+    <content type="html"><![CDATA[<p>普通にXcodeのプロジェクトに対してTravis CIでCIしているケースはよく見ますが、theos向けのものは見たことがないのでやってみました。</p>
+
+<h3>サンプルプロジェクト</h3>
+
+<p><a href="https://github.com/r-plus/SwipeShiftCaret">SwipeShiftCaret</a> を使いました。</p>
+
+<p>TravisのMac VMは<code>homebrew</code>が使えますので<code>dpkg</code>をインストールし、theosを配備してやればビルド環境として整います。
+タイミングはapt-get等で環境をととのえるフェーズとして<code>before_install</code>があるため、そこで配備します。git submodule等があればそちらのコードもこのフェーズで取得すると良いでしょう(git cloneではサブモジュールまで取得されません)。</p>
+
+<p>theosの配備についてはセットアップ及びライブラリ・ヘッダー更新用のスクリプトをTravis対応用にカレントディレクトリに展開するよう修正したものを使いました。</p>
+
+<pre><code>before_install:
+  - brew update
+  - brew install dpkg
+  - curl https://raw.github.com/r-plus/dotfiles/master/install_theos.sh | bash
+</code></pre>
+
+<p>そして本命のビルドはmakeを流せば良いため</p>
+
+<pre><code>script:
+  - make
+</code></pre>
+
+<p>これでTravis上でビルド可能です。TravisとのServiceHookを有効にしたリポジトリで、これらを記述した<code>.travis.yml</code>をプッシュすれば以後はプッシュ毎、PullReq毎にCIが走ってくれます。</p>
+
+<p>リターンコードが0であればSuccessになり、晴れて <a href="https://travis-ci.org/r-plus/SwipeShiftCaret.png?branch=master">https://travis-ci.org/r-plus/SwipeShiftCaret.png?branch=master</a> のアイコン <img src="https://travis-ci.org/r-plus/SwipeShiftCaret.png?branch=master" alt="" /> がPassingになります、READMEにでも貼っておきましょう。</p>
+]]></content>
+  </entry>
+  
+</feed>
