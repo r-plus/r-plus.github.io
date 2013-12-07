@@ -1,0 +1,370 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>File extension for theos logo. - seekpoint</title>
+  <meta name="author" content="r_plus">
+
+  
+  <meta name="description" content="theosのLogo用拡張子は種類がいくつかあるのでその話。 theosって？ theosはiOS/Mac向けのMakefileフレームワークだ。Makefileからincludeしてあげれば苦行のようなMakefileの記述からある程度解放してくれる。 Logo &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://r-plus.github.io/blog/2013/12/07/file-extension-for-theos/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <!-- for table extension for markdown -->
+  <link href="/stylesheets/data-table.css" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="seekpoint" type="application/atom+xml">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <div id="logo">
+<!--      <div id="logoLeft">{</div>-->
+<!--      <div id="logoText">mob</div>-->
+<!--      <div id="logoRight">}</div>-->
+  	<div class="clear"></div>
+  </div>
+  <h1><a href="/">seekpoint</a></h1>
+  
+    <h2>devlog</h2>
+  
+  <div class="clear"></div>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:r-plus.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      
+        <h1 class="entry-title">File Extension for Theos Logo.</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-07T10:08:00+09:00" pubdate data-updated="true">Dec 7<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>theosのLogo用拡張子は種類がいくつかあるのでその話。</p>
+
+<h3>theosって？</h3>
+
+<p>theosはiOS/Mac向けのMakefileフレームワークだ。Makefileからincludeしてあげれば苦行のようなMakefileの記述からある程度解放してくれる。</p>
+
+<h3>Logo</h3>
+
+<p>どちらかと言えばtheosはビルド過程にこの処理を含ませるためのMakefileという側面が強いが、MobileSubstrate向けのswizzleコードの記述を楽に書けるよう変換も行わせる事ができる。
+その際の拡張子が以下だ。</p>
+
+<ul>
+<li>.x</li>
+<li>.xm</li>
+<li>.xi</li>
+<li>.xmi</li>
+</ul>
+
+
+<p>この拡張子の違いについて説明しよう。まず一番一般的な<code>.xm</code>だが、これはLogo変換処理を行い<code>.mm</code>ファイルを生成し、Objective-C++としてプリプロセス、コンパイル、リンクを行う。
+次に<code>.x</code>はそれのObjective-C版だ。全てに言える事だがLogoの変換処理に違いはない。オリジナルのマクロによってObjc/Objc++で普通にswizzleを書くのと同じ状態へ持っていくのだから至極当然の処理順だ。</p>
+
+<p>最後にそれらに<code>i</code>がついたものだ、これは真っ先にobjc/objc++プリプロセスが行われる。その後にLogo処理、コンパイル、リンクとなる。そこそこコードを書いていると以下のように書きたいと思うこともあるだろう。</p>
+
+<pre><code>#define SHARED_INSTANCE [%c(SBProcess) sharedInstance]
+</code></pre>
+
+<p><code>%c</code>マクロはLogo処理向けであるのでプリプロセスに放り込むとエラーになる。このレベルであれば<code>objc_getClass</code>で代用がきくが以下のようなケースはそうもいかない。</p>
+
+<pre><code>%hook UIKBKey 
+- (NSString *)displayString {
+    NSString *result = %orig();
+    return [self.name rangeOfString:@"-Small-"].location != NSNotFound ? [result lowercaseString] : result;
+}
+%end
+
+%hook UIKBTree
+- (NSString *)displayString {
+    NSString *result = %orig();
+    return [self.name rangeOfString:@"-Small-"].location != NSNotFound ? [result lowercaseString] : result;
+%end
+</code></pre>
+
+<p>処理内容が同じなので変更は一度ですむようにすべきだが、関数にまとめても<code>%orig</code>は<code>%hook</code>の外では使用できない。
+プリプロセスが先に走る<code>.xi</code>, <code>.xmi</code>ではdefineにLogoを書いておく事が可能になるのでdefineでまとめられる。</p>
+
+<pre><code>#define HONOR_CASE \
+    NSString *result = %orig(); \
+    return [self.name rangeOfString:@"-Small-"].location != NSNotFound ? [result lowercaseString] : result;
+
+%hook UIKBKey
+- (NSString *)displayString { HONOR_CASE }
+%end
+
+%hook UIKBTree
+- (NSString *)displayString { HONOR_CASE }
+%end
+</code></pre>
+
+<p>めでたく修正時には一度の変更ですむようにできた。  <br/>
+コード出典: <a href="https://github.com/ashikase/ShowCase/blob/master/Tweak.xmi#L109">ShowCase &ndash; github/ashikase</a></p>
+
+<h3>まとめ</h3>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> extension </th>
+<th> process order</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> .x        </td>
+<td> Logo &ndash;> objc preprocess+compile &ndash;> link</td>
+</tr>
+<tr>
+<td></td>
+<td> .xm       </td>
+<td> Logo &ndash;> objc++ preprocess+compile &ndash;> link</td>
+</tr>
+<tr>
+<td></td>
+<td> .xi       </td>
+<td> objc preprocess &ndash;> Logo &ndash;> objc compile &ndash;> link</td>
+</tr>
+<tr>
+<td></td>
+<td> .xmi      </td>
+<td> objc++ preprocess &ndash;> Logo &ndash;> objc++ compile &ndash;> link</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>なおこの表は<a href="http://www.iphonedevwiki.net/index.php/Logos#Extension_for_Logos">iphonedevwiki</a>にも記述しておいた。</p>
+</div>
+
+<footer>
+
+  
+
+<span class="byline author vcard">Posted by <span class="fn">r_plus</span></span>
+
+
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/theos/'>theos</a>
+  
+</span>
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/blog/2013/12/07/file-extension-for-theos/" data-via="r_plus" data-counturl="http://r-plus.github.io/blog/2013/12/07/file-extension-for-theos/" >Tweet</a>
+  
+  
+  
+</div>
+
+</footer>
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">r_plus</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-07T10:08:00+09:00" pubdate data-updated="true">Dec 7<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/theos/'>theos</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/blog/2013/12/07/file-extension-for-theos/" data-via="r_plus" data-counturl="http://r-plus.github.io/blog/2013/12/07/file-extension-for-theos/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left articlenav" href="/blog/2013/10/19/travis-for-theos/" title="Previous Post: Travis for THEOS">&laquo; Travis for THEOS</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About</h1>
+  <div>
+  <img src="http://1.bp.blogspot.com/-RJBvTxR7CQ4/T0I501XtsMI/AAAAAAAAAEU/NpHc8h8SCo8/s220/fs2.jpg" width="80px" height="80px" style="float:left; margin-right:8px;" />
+  
+  <a href="https://github.com/r-plus">@r-plus</a> on GitHub
+  
+  
+  <p><a href="http://twitter.com/r_plus">@r_plus</a> on Twitter</p>
+  
+  <p>iOS tweak dev.</p>
+  </dev>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/12/07/file-extension-for-theos/">File Extension for Theos Logo.</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/19/travis-for-theos/">Travis for THEOS</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/20/iproute2-instead-of-net-tools/">Iproute2 Instead of Net-tools</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/28/timestamp/">TimeStamp</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/26/yin-yue-si/">引越し</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+<h1>Categories</h1>
+<ul id="categories">
+    <li class='category'><a href='/blog/categories/travis-ci/'>Travis-CI (1)</a></li>
+<li class='category'><a href='/blog/categories/activator/'>activator (1)</a></li>
+<li class='category'><a href='/blog/categories/iproute2/'>iproute2 (1)</a></li>
+<li class='category'><a href='/blog/categories/test/'>test (2)</a></li>
+<li class='category'><a href='/blog/categories/theos/'>theos (1)</a></li>
+<li class='category'><a href='/blog/categories/tweak/'>tweak (1)</a></li>
+
+</ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - r_plus -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

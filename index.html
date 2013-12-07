@@ -9,7 +9,7 @@
   <meta name="author" content="r_plus">
 
   
-  <meta name="description" content="普通にXcodeのプロジェクトに対してTravis CIでCIしているケースはよく見ますが、theos向けのものは見たことがないのでやってみました。 サンプルプロジェクト SwipeShiftCaret を使いました。 TravisのMac &hellip;">
+  <meta name="description" content="theosのLogo用拡張子は種類がいくつかあるのでその話。 theosって？ theosはiOS/Mac向けのMakefileフレームワークだ。Makefileからincludeしてあげれば苦行のようなMakefileの記述からある程度解放してくれる。 Logo &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,6 +21,8 @@
   <link rel="canonical" href="http://r-plus.github.io/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <!-- for table extension for markdown -->
+  <link href="/stylesheets/data-table.css" rel="stylesheet" type="text/css" />
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
@@ -72,6 +74,165 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2013/12/07/file-extension-for-theos/">File Extension for Theos Logo.</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-07T10:08:00+09:00" pubdate data-updated="true">Dec 7<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>theosのLogo用拡張子は種類がいくつかあるのでその話。</p>
+
+<h3>theosって？</h3>
+
+<p>theosはiOS/Mac向けのMakefileフレームワークだ。Makefileからincludeしてあげれば苦行のようなMakefileの記述からある程度解放してくれる。</p>
+
+<h3>Logo</h3>
+
+<p>どちらかと言えばtheosはビルド過程にこの処理を含ませるためのMakefileという側面が強いが、MobileSubstrate向けのswizzleコードの記述を楽に書けるよう変換も行わせる事ができる。
+その際の拡張子が以下だ。</p>
+
+<ul>
+<li>.x</li>
+<li>.xm</li>
+<li>.xi</li>
+<li>.xmi</li>
+</ul>
+
+
+<p>この拡張子の違いについて説明しよう。まず一番一般的な<code>.xm</code>だが、これはLogo変換処理を行い<code>.mm</code>ファイルを生成し、Objective-C++としてプリプロセス、コンパイル、リンクを行う。
+次に<code>.x</code>はそれのObjective-C版だ。全てに言える事だがLogoの変換処理に違いはない。オリジナルのマクロによってObjc/Objc++で普通にswizzleを書くのと同じ状態へ持っていくのだから至極当然の処理順だ。</p>
+
+<p>最後にそれらに<code>i</code>がついたものだ、これは真っ先にobjc/objc++プリプロセスが行われる。その後にLogo処理、コンパイル、リンクとなる。そこそこコードを書いていると以下のように書きたいと思うこともあるだろう。</p>
+
+<pre><code>#define SHARED_INSTANCE [%c(SBProcess) sharedInstance]
+</code></pre>
+
+<p><code>%c</code>マクロはLogo処理向けであるのでプリプロセスに放り込むとエラーになる。このレベルであれば<code>objc_getClass</code>で代用がきくが以下のようなケースはそうもいかない。</p>
+
+<pre><code>%hook UIKBKey 
+- (NSString *)displayString {
+    NSString *result = %orig();
+    return [self.name rangeOfString:@"-Small-"].location != NSNotFound ? [result lowercaseString] : result;
+}
+%end
+
+%hook UIKBTree
+- (NSString *)displayString {
+    NSString *result = %orig();
+    return [self.name rangeOfString:@"-Small-"].location != NSNotFound ? [result lowercaseString] : result;
+%end
+</code></pre>
+
+<p>処理内容が同じなので変更は一度ですむようにすべきだが、関数にまとめても<code>%orig</code>は<code>%hook</code>の外では使用できない。
+プリプロセスが先に走る<code>.xi</code>, <code>.xmi</code>ではdefineにLogoを書いておく事が可能になるのでdefineでまとめられる。</p>
+
+<pre><code>#define HONOR_CASE \
+    NSString *result = %orig(); \
+    return [self.name rangeOfString:@"-Small-"].location != NSNotFound ? [result lowercaseString] : result;
+
+%hook UIKBKey
+- (NSString *)displayString { HONOR_CASE }
+%end
+
+%hook UIKBTree
+- (NSString *)displayString { HONOR_CASE }
+%end
+</code></pre>
+
+<p>めでたく修正時には一度の変更ですむようにできた。  <br/>
+コード出典: <a href="https://github.com/ashikase/ShowCase/blob/master/Tweak.xmi#L109">ShowCase &ndash; github/ashikase</a></p>
+
+<h3>まとめ</h3>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> extension </th>
+<th> process order</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> .x        </td>
+<td> Logo &ndash;> objc preprocess+compile &ndash;> link</td>
+</tr>
+<tr>
+<td></td>
+<td> .xm       </td>
+<td> Logo &ndash;> objc++ preprocess+compile &ndash;> link</td>
+</tr>
+<tr>
+<td></td>
+<td> .xi       </td>
+<td> objc preprocess &ndash;> Logo &ndash;> objc compile &ndash;> link</td>
+</tr>
+<tr>
+<td></td>
+<td> .xmi      </td>
+<td> objc++ preprocess &ndash;> Logo &ndash;> objc++ compile &ndash;> link</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>なおこの表は<a href="http://www.iphonedevwiki.net/index.php/Logos#Extension_for_Logos">iphonedevwiki</a>にも記述しておいた。</p>
+</div>
+  
+  
+
+<footer>
+
+  
+
+<span class="byline author vcard">Posted by <span class="fn">r_plus</span></span>
+
+
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/theos/'>theos</a>
+  
+</span>
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/index.html" data-via="r_plus" data-counturl="http://r-plus.github.io/index.html" >Tweet</a>
+  
+  
+  
+</div>
+
+</footer>
+
+    </article>
   
   
     <article>
@@ -492,6 +653,10 @@ tag
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/12/07/file-extension-for-theos/">File Extension for Theos Logo.</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/10/19/travis-for-theos/">Travis for THEOS</a>
       </li>
     
@@ -507,10 +672,6 @@ tag
         <a href="/blog/2013/07/26/yin-yue-si/">引越し</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/07/25/test/">Test</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -520,6 +681,7 @@ tag
 <li class='category'><a href='/blog/categories/activator/'>activator (1)</a></li>
 <li class='category'><a href='/blog/categories/iproute2/'>iproute2 (1)</a></li>
 <li class='category'><a href='/blog/categories/test/'>test (2)</a></li>
+<li class='category'><a href='/blog/categories/theos/'>theos (1)</a></li>
 <li class='category'><a href='/blog/categories/tweak/'>tweak (1)</a></li>
 
 </ul>

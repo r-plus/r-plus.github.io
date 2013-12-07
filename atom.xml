@@ -4,7 +4,7 @@
   <title><![CDATA[seekpoint]]></title>
   <link href="http://r-plus.github.io/atom.xml" rel="self"/>
   <link href="http://r-plus.github.io/"/>
-  <updated>2013-10-19T12:06:13+09:00</updated>
+  <updated>2013-12-07T11:46:20+09:00</updated>
   <id>http://r-plus.github.io/</id>
   <author>
     <name><![CDATA[r_plus]]></name>
@@ -12,6 +12,112 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[File extension for theos logo.]]></title>
+    <link href="http://r-plus.github.io/blog/2013/12/07/file-extension-for-theos/"/>
+    <updated>2013-12-07T10:08:00+09:00</updated>
+    <id>http://r-plus.github.io/blog/2013/12/07/file-extension-for-theos</id>
+    <content type="html"><![CDATA[<p>theosのLogo用拡張子は種類がいくつかあるのでその話。</p>
+
+<h3>theosって？</h3>
+
+<p>theosはiOS/Mac向けのMakefileフレームワークだ。Makefileからincludeしてあげれば苦行のようなMakefileの記述からある程度解放してくれる。</p>
+
+<h3>Logo</h3>
+
+<p>どちらかと言えばtheosはビルド過程にこの処理を含ませるためのMakefileという側面が強いが、MobileSubstrate向けのswizzleコードの記述を楽に書けるよう変換も行わせる事ができる。
+その際の拡張子が以下だ。</p>
+
+<ul>
+<li>.x</li>
+<li>.xm</li>
+<li>.xi</li>
+<li>.xmi</li>
+</ul>
+
+
+<p>この拡張子の違いについて説明しよう。まず一番一般的な<code>.xm</code>だが、これはLogo変換処理を行い<code>.mm</code>ファイルを生成し、Objective-C++としてプリプロセス、コンパイル、リンクを行う。
+次に<code>.x</code>はそれのObjective-C版だ。全てに言える事だがLogoの変換処理に違いはない。オリジナルのマクロによってObjc/Objc++で普通にswizzleを書くのと同じ状態へ持っていくのだから至極当然の処理順だ。</p>
+
+<p>最後にそれらに<code>i</code>がついたものだ、これは真っ先にobjc/objc++プリプロセスが行われる。その後にLogo処理、コンパイル、リンクとなる。そこそこコードを書いていると以下のように書きたいと思うこともあるだろう。</p>
+
+<pre><code>#define SHARED_INSTANCE [%c(SBProcess) sharedInstance]
+</code></pre>
+
+<p><code>%c</code>マクロはLogo処理向けであるのでプリプロセスに放り込むとエラーになる。このレベルであれば<code>objc_getClass</code>で代用がきくが以下のようなケースはそうもいかない。</p>
+
+<pre><code>%hook UIKBKey 
+- (NSString *)displayString {
+    NSString *result = %orig();
+    return [self.name rangeOfString:@"-Small-"].location != NSNotFound ? [result lowercaseString] : result;
+}
+%end
+
+%hook UIKBTree
+- (NSString *)displayString {
+    NSString *result = %orig();
+    return [self.name rangeOfString:@"-Small-"].location != NSNotFound ? [result lowercaseString] : result;
+%end
+</code></pre>
+
+<p>処理内容が同じなので変更は一度ですむようにすべきだが、関数にまとめても<code>%orig</code>は<code>%hook</code>の外では使用できない。
+プリプロセスが先に走る<code>.xi</code>, <code>.xmi</code>ではdefineにLogoを書いておく事が可能になるのでdefineでまとめられる。</p>
+
+<pre><code>#define HONOR_CASE \
+    NSString *result = %orig(); \
+    return [self.name rangeOfString:@"-Small-"].location != NSNotFound ? [result lowercaseString] : result;
+
+%hook UIKBKey
+- (NSString *)displayString { HONOR_CASE }
+%end
+
+%hook UIKBTree
+- (NSString *)displayString { HONOR_CASE }
+%end
+</code></pre>
+
+<p>めでたく修正時には一度の変更ですむようにできた。  <br/>
+コード出典: <a href="https://github.com/ashikase/ShowCase/blob/master/Tweak.xmi#L109">ShowCase &ndash; github/ashikase</a></p>
+
+<h3>まとめ</h3>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> extension </th>
+<th> process order</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> .x        </td>
+<td> Logo &ndash;> objc preprocess+compile &ndash;> link</td>
+</tr>
+<tr>
+<td></td>
+<td> .xm       </td>
+<td> Logo &ndash;> objc++ preprocess+compile &ndash;> link</td>
+</tr>
+<tr>
+<td></td>
+<td> .xi       </td>
+<td> objc preprocess &ndash;> Logo &ndash;> objc compile &ndash;> link</td>
+</tr>
+<tr>
+<td></td>
+<td> .xmi      </td>
+<td> objc++ preprocess &ndash;> Logo &ndash;> objc++ compile &ndash;> link</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>なおこの表は<a href="http://www.iphonedevwiki.net/index.php/Logos#Extension_for_Logos">iphonedevwiki</a>にも記述しておいた。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Travis for THEOS]]></title>
