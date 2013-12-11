@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Travis-CI - seekpoint</title>
+  <title>AllAroundPullViewの後継、AAPullToRefreshを作成しました - seekpoint</title>
   <meta name="author" content="r_plus">
 
   
-  <meta name="description" content="Category: Travis-CI">
+  <meta name="description" content="1年ほど前にSleipnizerにPullToによるアクションを搭載するためにAllAroundPullViewを開発し組み込んだ上でOSSで公開していました。 その後iOS 6でApple実装によるUIRefreshControlが提供され、iOS 7で見た目が大幅に変わったためiOS &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://r-plus.github.ioblog/categories/travis-ci/">
+  <link rel="canonical" href="http://r-plus.github.io/blog/2013/12/11/aapulltorefreshwozuo-cheng-simasita/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <!-- for table extension for markdown -->
@@ -73,35 +73,134 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Travis-CI</h1>
+    
+      
+        <h1 class="entry-title">AllAroundPullViewの後継、AAPullToRefreshを作成しました</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-11T23:08:00+09:00" pubdate data-updated="true">Dec 11<span>th</span>, 2013</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>1年ほど前にSleipnizerにPullToによるアクションを搭載するために<code>AllAroundPullView</code>を開発し組み込んだ上でOSSで公開していました。</p>
 
-  
-  <h2>2013</h2>
+<p>その後iOS 6でApple実装によるUIRefreshControlが提供され、iOS 7で見た目が大幅に変わったためiOS 7向けのSleipnizerにおいてもなんか変えられたらなーと思っていたところに見た目素晴らしいライブラリが公開されました。</p>
 
-<article>
-  
-<h1><a href="/blog/2013/10/19/travis-for-theos/">Travis for THEOS</a></h1>
-<time datetime="2013-10-19T11:25:00+09:00" pubdate><span class='month'>Oct</span> <span class='day'>19</span> <span class='year'>2013</span></time>
+<p>それがこちら <a href="https://github.com/uzysjung/UzysCircularProgressPullToRefresh">UzysCircularProgressPullToRefresh</a></p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/travis-ci/'>Travis-CI</a></span>
-</footer>
+<p><img src="https://raw.github.com/uzysjung/UzysCircularProgressPullToRefresh/master/UzysCircularProgressPulltoRefresh2.gif" alt="" /></p>
+
+<p>Pinterest風でなかなか良いぞと思ったので、forkして以下のあたりの変更を施して出来上がったのが<code>AAPullToRefresh</code>です！</p>
+
+<ul>
+<li>見つけたバグっぽいのつぶし</li>
+<li>4方向同時に追加可能なように修正</li>
+<li>トリガー状態で裏Viewを発光させる</li>
+<li>Sleipnizer向けにthresholdプロパティの追加</li>
+</ul>
 
 
-</article>
+<p><a href="https://github.com/r-plus/AAPullToRefresh">AAPullToRefresh</a></p>
 
+<p><img src="http://f.cl.ly/items/1H1r3g3g20241k3f0Y3z/demo3.gif" alt="" /></p>
+
+<p>パッと見の見た目変化に加えて、指を離してからビューのスクロールが止まるまでとそこからインジケーターがしぼんで消えつつ通常位置までビューが戻るあたりの滑らかなアニメーションがAllAroundPullViewに比べて気持ち良いものになってます。</p>
+
+<p>多分iOS 7向けのSleipnizerに搭載されますのでご期待あれ。</p>
 </div>
 
+<footer>
+
   
+
+<span class="byline author vcard">Posted by <span class="fn">r_plus</span></span>
+
+
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/pulltorefresh/'>PullToRefresh</a>
+  
+</span>
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/blog/2013/12/11/aapulltorefreshwozuo-cheng-simasita/" data-via="r_plus" data-counturl="http://r-plus.github.io/blog/2013/12/11/aapulltorefreshwozuo-cheng-simasita/" >Tweet</a>
+  
+  
+  
+</div>
+
+</footer>
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">r_plus</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-11T23:08:00+09:00" pubdate data-updated="true">Dec 11<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/pulltorefresh/'>PullToRefresh</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/blog/2013/12/11/aapulltorefreshwozuo-cheng-simasita/" data-via="r_plus" data-counturl="http://r-plus.github.io/blog/2013/12/11/aapulltorefreshwozuo-cheng-simasita/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left articlenav" href="/blog/2013/12/07/file-extension-for-theos/" title="Previous Post: File extension for theos logo.">&laquo; File extension for theos logo.</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>

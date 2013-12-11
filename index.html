@@ -9,7 +9,7 @@
   <meta name="author" content="r_plus">
 
   
-  <meta name="description" content="theosのLogo用拡張子は種類がいくつかあるのでその話。 theosって？ theosはiOS/Mac向けのMakefileフレームワークだ。Makefileからincludeしてあげれば苦行のようなMakefileの記述からある程度解放してくれる。 Logo &hellip;">
+  <meta name="description" content="1年ほど前にSleipnizerにPullToによるアクションを搭載するためにAllAroundPullViewを開発し組み込んだ上でOSSで公開していました。 その後iOS 6でApple実装によるUIRefreshControlが提供され、iOS 7で見た目が大幅に変わったためiOS &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,6 +74,92 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2013/12/11/aapulltorefreshwozuo-cheng-simasita/">AllAroundPullViewの後継、AAPullToRefreshを作成しました</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-11T23:08:00+09:00" pubdate data-updated="true">Dec 11<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>1年ほど前にSleipnizerにPullToによるアクションを搭載するために<code>AllAroundPullView</code>を開発し組み込んだ上でOSSで公開していました。</p>
+
+<p>その後iOS 6でApple実装によるUIRefreshControlが提供され、iOS 7で見た目が大幅に変わったためiOS 7向けのSleipnizerにおいてもなんか変えられたらなーと思っていたところに見た目素晴らしいライブラリが公開されました。</p>
+
+<p>それがこちら <a href="https://github.com/uzysjung/UzysCircularProgressPullToRefresh">UzysCircularProgressPullToRefresh</a></p>
+
+<p><img src="https://raw.github.com/uzysjung/UzysCircularProgressPullToRefresh/master/UzysCircularProgressPulltoRefresh2.gif" alt="" /></p>
+
+<p>Pinterest風でなかなか良いぞと思ったので、forkして以下のあたりの変更を施して出来上がったのが<code>AAPullToRefresh</code>です！</p>
+
+<ul>
+<li>見つけたバグっぽいのつぶし</li>
+<li>4方向同時に追加可能なように修正</li>
+<li>トリガー状態で裏Viewを発光させる</li>
+<li>Sleipnizer向けにthresholdプロパティの追加</li>
+</ul>
+
+
+<p><a href="https://github.com/r-plus/AAPullToRefresh">AAPullToRefresh</a></p>
+
+<p><img src="http://f.cl.ly/items/1H1r3g3g20241k3f0Y3z/demo3.gif" alt="" /></p>
+
+<p>パッと見の見た目変化に加えて、指を離してからビューのスクロールが止まるまでとそこからインジケーターがしぼんで消えつつ通常位置までビューが戻るあたりの滑らかなアニメーションがAllAroundPullViewに比べて気持ち良いものになってます。</p>
+
+<p>多分iOS 7向けのSleipnizerに搭載されますのでご期待あれ。</p>
+</div>
+  
+  
+
+<footer>
+
+  
+
+<span class="byline author vcard">Posted by <span class="fn">r_plus</span></span>
+
+
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/pulltorefresh/'>PullToRefresh</a>
+  
+</span>
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/index.html" data-via="r_plus" data-counturl="http://r-plus.github.io/index.html" >Tweet</a>
+  
+  
+  
+</div>
+
+</footer>
+
+    </article>
   
   
     <article>
@@ -653,6 +739,10 @@ tag
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/12/11/aapulltorefreshwozuo-cheng-simasita/">AllAroundPullViewの後継、AAPullToRefreshを作成しました</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/12/07/file-extension-for-theos/">File Extension for Theos Logo.</a>
       </li>
     
@@ -668,16 +758,13 @@ tag
         <a href="/blog/2013/07/28/timestamp/">TimeStamp</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/07/26/yin-yue-si/">引越し</a>
-      </li>
-    
   </ul>
 </section>
 <section>
 <h1>Categories</h1>
 <ul id="categories">
-    <li class='category'><a href='/blog/categories/travis-ci/'>Travis-CI (1)</a></li>
+    <li class='category'><a href='/blog/categories/pulltorefresh/'>PullToRefresh (1)</a></li>
+<li class='category'><a href='/blog/categories/travis-ci/'>Travis-CI (1)</a></li>
 <li class='category'><a href='/blog/categories/activator/'>activator (1)</a></li>
 <li class='category'><a href='/blog/categories/iproute2/'>iproute2 (1)</a></li>
 <li class='category'><a href='/blog/categories/test/'>test (2)</a></li>
