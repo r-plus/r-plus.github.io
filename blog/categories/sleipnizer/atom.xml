@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Sleipnizer, | seekpoint]]></title>
+  <title><![CDATA[Category: Sleipnizer | seekpoint]]></title>
   <link href="http://r-plus.github.io/blog/categories/sleipnizer/atom.xml" rel="self"/>
   <link href="http://r-plus.github.io/"/>
-  <updated>2014-01-26T12:34:26+09:00</updated>
+  <updated>2014-01-26T12:41:55+09:00</updated>
   <id>http://r-plus.github.io/</id>
   <author>
     <name><![CDATA[r_plus]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Sleipnizer 4.1]]></title>
+    <title type="html"><![CDATA[Sleipnizer v4.1 overview]]></title>
     <link href="http://r-plus.github.io/blog/2014/01/26/sleipnizer-4-dot-1/"/>
     <updated>2014-01-26T12:17:00+09:00</updated>
     <id>http://r-plus.github.io/blog/2014/01/26/sleipnizer-4-dot-1</id>

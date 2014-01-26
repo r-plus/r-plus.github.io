@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iproute2 | seekpoint]]></title>
   <link href="http://r-plus.github.io/blog/categories/iproute2/atom.xml" rel="self"/>
   <link href="http://r-plus.github.io/"/>
-  <updated>2014-01-26T12:34:26+09:00</updated>
+  <updated>2014-01-26T12:41:55+09:00</updated>
   <id>http://r-plus.github.io/</id>
   <author>
     <name><![CDATA[r_plus]]></name>
@@ -21,16 +21,18 @@
     <content type="html"><![CDATA[<p>メンテナンスされておらず、最早未来のないnet-toolsの代替であるiproute2での静的ルーティングの設定。</p>
 
 <p>■追加
-{% codeblock lang:sh %}
-route add -net 192.168.33.128/25 gw 192.168.10.1 eth0
-ip route add 192.168.33.128/25 via 192.168.10.1
-{% endcodeblock %}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>route add -net 192.168.33.128/25 gw 192.168.10.1 eth0
+</span><span class='line'>ip route add 192.168.33.128/25 via 192.168.10.1
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>■削除
-{% codeblock lang:sh %}
-route del -net 192.168.33.128/25 gw 192.168.10.1 eth0
-ip route del 192.168.33.128
-{% endcodeblock %}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>route del -net 192.168.33.128/25 gw 192.168.10.1 eth0
+</span><span class='line'>ip route del 192.168.33.128
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 ]]></content>
   </entry>
   
