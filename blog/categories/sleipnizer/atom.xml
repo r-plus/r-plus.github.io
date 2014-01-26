@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: tweak | seekpoint]]></title>
-  <link href="http://r-plus.github.io/blog/categories/tweak/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Sleipnizer, | seekpoint]]></title>
+  <link href="http://r-plus.github.io/blog/categories/sleipnizer/atom.xml" rel="self"/>
   <link href="http://r-plus.github.io/"/>
   <updated>2014-01-26T12:34:26+09:00</updated>
   <id>http://r-plus.github.io/</id>
@@ -33,20 +33,6 @@
 
 
 <p>その他、バグ修正等。たぶんこの実装を行った事で「Run JavaScript n」じゃなくて名前にしてくれと要望がでると思いますが、いまのところはペンディングで。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[TimeStamp]]></title>
-    <link href="http://r-plus.github.io/blog/2013/07/28/timestamp/"/>
-    <updated>2013-07-28T00:02:00+09:00</updated>
-    <id>http://r-plus.github.io/blog/2013/07/28/timestamp</id>
-    <content type="html"><![CDATA[<p>最近終業時間をメモるためにカレンダーにその時間を登録しているので、そのショートカットとしてActivator用のtweakを作りました。</p>
-
-<p>TimeStamp <a href="https://github.com/r-plus/TimeStamp">https://github.com/r-plus/TimeStamp</a>   <br/>
-debも置いてあります。</p>
-
-<p>最近のgithubはrepo作成時にライセンス選ぶとライセンス本文ファイルとREADME.mdを生成してくれるんですね。ちなみにPublicDomainにしてみました。</p>
 ]]></content>
   </entry>
   
