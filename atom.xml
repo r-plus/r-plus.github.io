@@ -4,7 +4,7 @@
   <title><![CDATA[seekpoint]]></title>
   <link href="http://r-plus.github.io/atom.xml" rel="self"/>
   <link href="http://r-plus.github.io/"/>
-  <updated>2014-01-26T12:41:55+09:00</updated>
+  <updated>2014-02-18T21:16:41+09:00</updated>
   <id>http://r-plus.github.io/</id>
   <author>
     <name><![CDATA[r_plus]]></name>
@@ -12,6 +12,41 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Tip of depends in debian package]]></title>
+    <link href="http://r-plus.github.io/blog/2014/02/18/tip-of-depends-in-debian-package/"/>
+    <updated>2014-02-18T20:38:00+09:00</updated>
+    <id>http://r-plus.github.io/blog/2014/02/18/tip-of-depends-in-debian-package</id>
+    <content type="html"><![CDATA[<p>iPhoneとiPod touch向けにはiOS 4.2以上の全てをサポートして、iPadではiOS 4.2以上5.0未満をサポートする時(RestoreTabがこれ)のDependsの書き方。</p>
+
+<pre><code>firmware (&gt;= 4.2), cy+model.iphone | cy+model.ipod | firmware (&lt;&lt; 5.0) 
+</code></pre>
+
+<ul>
+<li><p>firmware (>= 4.2)  <br/>
+これは至極一般的ですね。全てのデバイスに対してiOS 4.2以上を要求します。</p></li>
+<li><p>cy+model.iphone | cy+model.ipod | firmware (&lt;&lt; 5.0)  <br/>
+<code>|</code>のOR演算子でつないでいます。<code>cy+model</code>はiphone, ipod, ipadそれぞれが存在します。ORは先頭から評価されていくため以下のようになります。</p>
+
+<ul>
+<li>iPhoneであればTRUE</li>
+<li>iPhoneではないが、iPodであればTRUE</li>
+<li>iPhoneでもなく、iPodでもないが(== iPad)、iOS 5.0未満であればTRUE</li>
+<li>iPadでiOS 5以上だとFALSE</li>
+</ul>
+</li>
+</ul>
+
+
+<h4>参考</h4>
+
+<p>iOS 7からRocketBootstrapが必要になったAppListの場合</p>
+
+<pre><code>com.rpetrich.rocketbootstrap (&gt;= 1.0) | firmware (&lt;&lt; 7.0)
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Sleipnizer v4.1 overview]]></title>
