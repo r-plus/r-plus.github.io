@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Travis-CI - seekpoint</title>
+  <title>PostNotification with object - seekpoint</title>
   <meta name="author" content="r_plus">
 
   
-  <meta name="description" content="Category: Travis-CI">
+  <meta name="description" content="DarwinNotifyCenter PreferenceLoaderからtweakの設定変更時の変更通知としてスタンダードになっているCFNotificationCenterのDarwinNotifyCenterですが、これはシステムグローバル用の通知として設計されており、 void &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://r-plus.github.ioblog/categories/travis-ci/">
+  <link rel="canonical" href="http://r-plus.github.io/blog/2014/03/09/postnotification-with-object/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <!-- for table extension for markdown -->
@@ -73,35 +73,136 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Travis-CI</h1>
+    
+      
+        <h1 class="entry-title">PostNotification With Object</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-09T16:27:00+09:00" pubdate data-updated="true">Mar 9<span>th</span>, 2014</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><h3>DarwinNotifyCenter</h3>
 
-  
-  <h2>2013</h2>
+<p>PreferenceLoaderからtweakの設定変更時の変更通知としてスタンダードになっているCFNotificationCenterの<code>DarwinNotifyCenter</code>ですが、これはシステムグローバル用の通知として設計されており、</p>
 
-<article>
-  
-<h1><a href="/blog/2013/10/19/travis-for-theos/">Travis for THEOS</a></h1>
-<time datetime="2013-10-19T11:25:00+09:00" pubdate><span class='month'>Oct</span> <span class='day'>19</span> <span class='year'>2013</span></time>
+<pre><code>void CFNotificationCenterPostNotification(CFNotificationCenterRef center,
+        CFStringRef name,
+        const void *object,
+        CFDictionaryRef userInfo,
+        Boolean deliverImmediately);
+</code></pre>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/travis-ci/'>Travis-CI</a></span>
-</footer>
+<p>CFNotificationCenterPostNotificationにおける引数<code>object</code>, <code>userinfo</code>, <code>deliverimmediately</code>は無視され<code>NULL</code>になります。であれば、有効な引数は<code>name</code>だけなので、<code>uint32_t notify_post(const char *name);</code>はcenterをDarwinでnameを引数に取りその他をNULLにした便利関数です。</p>
 
+<p>通常であれば何か変更が入ったら全て設定値をロードしなおせば良いが、極々まれにそれでは都合が悪い場合(パフォーマンスとか)があります。何の設定が変更されたかをPreferenceBundleとして得る事はセッターを設定すると得られますが、それを対象のプロセスに伝える方法としてIPCをするのは大げさでちょいと面倒でした。</p>
 
-</article>
+<h3>DistributedCenter</h3>
 
+<p>CFNotificationCenterRefには3種類あり、<code>Darwin</code>, <code>Local</code>, <code>Distributed</code>の3種類があります。このうち、<code>Distributed</code>はiOSではimportされない記述になっています。</p>
+
+<pre><code>#if (TARGET_OS_MAC &amp;&amp; !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32
+CF_EXPORT CFNotificationCenterRef CFNotificationCenterGetDistributedCenter(void);
+#endif
+</code></pre>
+
+<p>が、iOS 5からいつのまにか内部的には実装されていました。
+サンプルコードは<a href="http://www.iphonedevwiki.net/index.php/CFNotificationCenter">dev wiki</a>に書きました。
+Cloakyは1.6.3からこれを使用してステータスバーアイコンのON/OFF設定を検出しています。</p>
 </div>
 
+<footer>
+
   
+
+<span class="byline author vcard">Posted by <span class="fn">r_plus</span></span>
+
+
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/dev/'>dev</a>, <a class='category' href='/blog/categories/tweak/'>tweak</a>
+  
+</span>
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/blog/2014/03/09/postnotification-with-object/" data-via="r_plus" data-counturl="http://r-plus.github.io/blog/2014/03/09/postnotification-with-object/" >Tweet</a>
+  
+  
+  
+</div>
+
+</footer>
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">r_plus</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-09T16:27:00+09:00" pubdate data-updated="true">Mar 9<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/dev/'>dev</a>, <a class='category' href='/blog/categories/tweak/'>tweak</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/blog/2014/03/09/postnotification-with-object/" data-via="r_plus" data-counturl="http://r-plus.github.io/blog/2014/03/09/postnotification-with-object/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left articlenav" href="/blog/2014/02/18/tip-of-depends-in-debian-package/" title="Previous Post: Tip of depends in debian package">&laquo; Tip of depends in debian package</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>

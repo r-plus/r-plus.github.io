@@ -9,7 +9,7 @@
   <meta name="author" content="r_plus">
 
   
-  <meta name="description" content="iPhoneとiPod touch向けにはiOS 4.2以上の全てをサポートして、iPadではiOS 4.2以上5.0未満をサポートする時(RestoreTabがこれ)のDependsの書き方。 firmware (&gt;= 4.2), cy+model.iphone | cy+model. &hellip;">
+  <meta name="description" content="DarwinNotifyCenter PreferenceLoaderからtweakの設定変更時の変更通知としてスタンダードになっているCFNotificationCenterのDarwinNotifyCenterですが、これはシステムグローバル用の通知として設計されており、 void &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,6 +74,94 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2014/03/09/postnotification-with-object/">PostNotification With Object</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-09T16:27:00+09:00" pubdate data-updated="true">Mar 9<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>DarwinNotifyCenter</h3>
+
+<p>PreferenceLoaderからtweakの設定変更時の変更通知としてスタンダードになっているCFNotificationCenterの<code>DarwinNotifyCenter</code>ですが、これはシステムグローバル用の通知として設計されており、</p>
+
+<pre><code>void CFNotificationCenterPostNotification(CFNotificationCenterRef center,
+        CFStringRef name,
+        const void *object,
+        CFDictionaryRef userInfo,
+        Boolean deliverImmediately);
+</code></pre>
+
+<p>CFNotificationCenterPostNotificationにおける引数<code>object</code>, <code>userinfo</code>, <code>deliverimmediately</code>は無視され<code>NULL</code>になります。であれば、有効な引数は<code>name</code>だけなので、<code>uint32_t notify_post(const char *name);</code>はcenterをDarwinでnameを引数に取りその他をNULLにした便利関数です。</p>
+
+<p>通常であれば何か変更が入ったら全て設定値をロードしなおせば良いが、極々まれにそれでは都合が悪い場合(パフォーマンスとか)があります。何の設定が変更されたかをPreferenceBundleとして得る事はセッターを設定すると得られますが、それを対象のプロセスに伝える方法としてIPCをするのは大げさでちょいと面倒でした。</p>
+
+<h3>DistributedCenter</h3>
+
+<p>CFNotificationCenterRefには3種類あり、<code>Darwin</code>, <code>Local</code>, <code>Distributed</code>の3種類があります。このうち、<code>Distributed</code>はiOSではimportされない記述になっています。</p>
+
+<pre><code>#if (TARGET_OS_MAC &amp;&amp; !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32
+CF_EXPORT CFNotificationCenterRef CFNotificationCenterGetDistributedCenter(void);
+#endif
+</code></pre>
+
+<p>が、iOS 5からいつのまにか内部的には実装されていました。
+サンプルコードは<a href="http://www.iphonedevwiki.net/index.php/CFNotificationCenter">dev wiki</a>に書きました。
+Cloakyは1.6.3からこれを使用してステータスバーアイコンのON/OFF設定を検出しています。</p>
+</div>
+  
+  
+
+<footer>
+
+  
+
+<span class="byline author vcard">Posted by <span class="fn">r_plus</span></span>
+
+
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/dev/'>dev</a>, <a class='category' href='/blog/categories/tweak/'>tweak</a>
+  
+</span>
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/index.html" data-via="r_plus" data-counturl="http://r-plus.github.io/index.html" >Tweet</a>
+  
+  
+  
+</div>
+
+</footer>
+
+    </article>
   
   
     <article>
@@ -897,6 +985,10 @@ tag
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/03/09/postnotification-with-object/">PostNotification With Object</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/02/18/tip-of-depends-in-debian-package/">Tip of Depends in Debian Package</a>
       </li>
     
@@ -912,10 +1004,6 @@ tag
         <a href="/blog/2013/12/07/file-extension-for-theos/">File Extension for Theos Logo.</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/10/19/travis-for-theos/">Travis for THEOS</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -926,10 +1014,11 @@ tag
 <li class='category'><a href='/blog/categories/sleipnizer/'>Sleipnizer (1)</a></li>
 <li class='category'><a href='/blog/categories/travis-ci/'>Travis-CI (1)</a></li>
 <li class='category'><a href='/blog/categories/activator/'>activator (1)</a></li>
+<li class='category'><a href='/blog/categories/dev/'>dev (1)</a></li>
 <li class='category'><a href='/blog/categories/iproute2/'>iproute2 (1)</a></li>
 <li class='category'><a href='/blog/categories/test/'>test (2)</a></li>
 <li class='category'><a href='/blog/categories/theos/'>theos (1)</a></li>
-<li class='category'><a href='/blog/categories/tweak/'>tweak (2)</a></li>
+<li class='category'><a href='/blog/categories/tweak/'>tweak (3)</a></li>
 
 </ul>
 </section>
