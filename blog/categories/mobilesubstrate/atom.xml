@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: mobilesubstrate, | seekpoint]]></title>
+  <link href="http://r-plus.github.io/blog/categories/mobilesubstrate/atom.xml" rel="self"/>
+  <link href="http://r-plus.github.io/"/>
+  <updated>2014-06-22T21:33:36+09:00</updated>
+  <id>http://r-plus.github.io/</id>
+  <author>
+    <name><![CDATA[r_plus]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[UIKitターゲットにおける厳密なApplication判定]]></title>
+    <link href="http://r-plus.github.io/blog/2014/06/22/uikittagetutoniokeruyan-mi-naapplicationpan-ding/"/>
+    <updated>2014-06-22T21:24:00+09:00</updated>
+    <id>http://r-plus.github.io/blog/2014/06/22/uikittagetutoniokeruyan-mi-naapplicationpan-ding</id>
+    <content type="html"><![CDATA[<p>全アプリ向けにtweakを作成する時は慣例として<code>com.apple.UIKit</code>を指定するが、UIKitフレームワークをリンクしているバイナリは<code>/bin</code>, <code>/sbin</code>, <code>/usr/libexec</code>配下などにもある。</p>
+
+<p>これを厳密にアプリケーションのみをターゲットにするなら下記のコードで<code>%init</code>を行うかどうかを制御すれば良い。</p>
+
+<pre><code>NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
+if ([bundlePath hasSuffix:@".app"]) {
+    // for application code.
+    %init;
+}
+</code></pre>
+
+<p>Available in iOS 2.0 and later.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -5,13 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - seekpoint</title>
+  <title>UIKitターゲットにおける厳密なApplication判定 - seekpoint</title>
   <meta name="author" content="r_plus">
 
   
-  <meta name="description" content="Blog Archive 2014 UIKitターゲットにおける厳密なApplication判定
-Jun 22 2014 posted in mobilesubstrate,, tweak PostNotification with object
-Mar 09 2014 posted in &hellip;">
+  <meta name="description" content="全アプリ向けにtweakを作成する時は慣例としてcom.apple.UIKitを指定するが、UIKitフレームワークをリンクしているバイナリは/bin, /sbin, /usr/libexec配下などにもある。 これを厳密にアプリケーションのみをターゲットにするなら下記のコードで% &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@ Mar 09 2014 posted in &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://r-plus.github.io/blog/archives/">
+  <link rel="canonical" href="http://r-plus.github.io/blog/2014/06/22/uikittagetutoniokeruyan-mi-naapplicationpan-ding/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <!-- for table extension for markdown -->
@@ -75,174 +73,121 @@ Mar 09 2014 posted in &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Blog Archive</h1>
+    
+      
+        <h1 class="entry-title">UIKitターゲットにおける厳密なApplication判定</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-22T21:24:00+09:00" pubdate data-updated="true">Jun 22<span>nd</span>, 2014</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives">
 
 
+<div class="entry-content"><p>全アプリ向けにtweakを作成する時は慣例として<code>com.apple.UIKit</code>を指定するが、UIKitフレームワークをリンクしているバイナリは<code>/bin</code>, <code>/sbin</code>, <code>/usr/libexec</code>配下などにもある。</p>
 
-  
-  <h2>2014</h2>
+<p>これを厳密にアプリケーションのみをターゲットにするなら下記のコードで<code>%init</code>を行うかどうかを制御すれば良い。</p>
 
-<article>
-  
-<h1><a href="/blog/2014/06/22/uikittagetutoniokeruyan-mi-naapplicationpan-ding/">UIKitターゲットにおける厳密なApplication判定</a></h1>
-<time datetime="2014-06-22T21:24:00+09:00" pubdate><span class='month'>Jun</span> <span class='day'>22</span> <span class='year'>2014</span></time>
+<pre><code>NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
+if ([bundlePath hasSuffix:@".app"]) {
+    // for application code.
+    %init;
+}
+</code></pre>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/mobilesubstrate/'>mobilesubstrate,</a>, <a class='category' href='/blog/categories/tweak/'>tweak</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2014/03/09/postnotification-with-object/">PostNotification with object</a></h1>
-<time datetime="2014-03-09T16:27:00+09:00" pubdate><span class='month'>Mar</span> <span class='day'>09</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/dev/'>dev</a>, <a class='category' href='/blog/categories/tweak/'>tweak</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2014/02/18/tip-of-depends-in-debian-package/">Tip of depends in debian package</a></h1>
-<time datetime="2014-02-18T20:38:00+09:00" pubdate><span class='month'>Feb</span> <span class='day'>18</span> <span class='year'>2014</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2014/01/26/sleipnizer-4-dot-1/">Sleipnizer v4.1 overview</a></h1>
-<time datetime="2014-01-26T12:17:00+09:00" pubdate><span class='month'>Jan</span> <span class='day'>26</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/sleipnizer/'>Sleipnizer</a>, <a class='category' href='/blog/categories/tweak/'>tweak</a></span>
-</footer>
-
-
-</article>
-
-
-
-  
-  <h2>2013</h2>
-
-<article>
-  
-<h1><a href="/blog/2013/12/11/aapulltorefreshwozuo-cheng-simasita/">AllAroundPullViewの後継、AAPullToRefreshを作成しました</a></h1>
-<time datetime="2013-12-11T23:08:00+09:00" pubdate><span class='month'>Dec</span> <span class='day'>11</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/pulltorefresh/'>PullToRefresh</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/12/07/file-extension-for-theos/">File extension for theos logo.</a></h1>
-<time datetime="2013-12-07T10:08:00+09:00" pubdate><span class='month'>Dec</span> <span class='day'>07</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/theos/'>theos</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/10/19/travis-for-theos/">Travis for THEOS</a></h1>
-<time datetime="2013-10-19T11:25:00+09:00" pubdate><span class='month'>Oct</span> <span class='day'>19</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/travis-ci/'>Travis-CI</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/08/20/iproute2-instead-of-net-tools/">iproute2 instead of net-tools</a></h1>
-<time datetime="2013-08-20T23:00:00+09:00" pubdate><span class='month'>Aug</span> <span class='day'>20</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/iproute2/'>iproute2</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/07/28/timestamp/">TimeStamp</a></h1>
-<time datetime="2013-07-28T00:02:00+09:00" pubdate><span class='month'>Jul</span> <span class='day'>28</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/activator/'>activator</a>, <a class='category' href='/blog/categories/tweak/'>tweak</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/07/26/yin-yue-si/">引越し</a></h1>
-<time datetime="2013-07-26T00:59:00+09:00" pubdate><span class='month'>Jul</span> <span class='day'>26</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/test/'>test</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/07/25/test/">test</a></h1>
-<time datetime="2013-07-25T20:22:00+09:00" pubdate><span class='month'>Jul</span> <span class='day'>25</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/test/'>test</a></span>
-</footer>
-
-
-</article>
-
+<p>Available in iOS 2.0 and later.</p>
 </div>
 
+<footer>
+
   
+
+<span class="byline author vcard">Posted by <span class="fn">r_plus</span></span>
+
+
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/mobilesubstrate/'>mobilesubstrate,</a>, <a class='category' href='/blog/categories/tweak/'>tweak</a>
+  
+</span>
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/blog/2014/06/22/uikittagetutoniokeruyan-mi-naapplicationpan-ding/" data-via="r_plus" data-counturl="http://r-plus.github.io/blog/2014/06/22/uikittagetutoniokeruyan-mi-naapplicationpan-ding/" >Tweet</a>
+  
+  
+  
+</div>
+
+</footer>
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">r_plus</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-22T21:24:00+09:00" pubdate data-updated="true">Jun 22<span>nd</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/mobilesubstrate/'>mobilesubstrate,</a>, <a class='category' href='/blog/categories/tweak/'>tweak</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/blog/2014/06/22/uikittagetutoniokeruyan-mi-naapplicationpan-ding/" data-via="r_plus" data-counturl="http://r-plus.github.io/blog/2014/06/22/uikittagetutoniokeruyan-mi-naapplicationpan-ding/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left articlenav" href="/blog/2014/03/09/postnotification-with-object/" title="Previous Post: PostNotification with object">&laquo; PostNotification with object</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>

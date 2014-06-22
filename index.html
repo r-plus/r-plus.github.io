@@ -9,7 +9,7 @@
   <meta name="author" content="r_plus">
 
   
-  <meta name="description" content="DarwinNotifyCenter PreferenceLoaderからtweakの設定変更時の変更通知としてスタンダードになっているCFNotificationCenterのDarwinNotifyCenterですが、これはシステムグローバル用の通知として設計されており、 void &hellip;">
+  <meta name="description" content="全アプリ向けにtweakを作成する時は慣例としてcom.apple.UIKitを指定するが、UIKitフレームワークをリンクしているバイナリは/bin, /sbin, /usr/libexec配下などにもある。 これを厳密にアプリケーションのみをターゲットにするなら下記のコードで% &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,6 +74,79 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2014/06/22/uikittagetutoniokeruyan-mi-naapplicationpan-ding/">UIKitターゲットにおける厳密なApplication判定</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-22T21:24:00+09:00" pubdate data-updated="true">Jun 22<span>nd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>全アプリ向けにtweakを作成する時は慣例として<code>com.apple.UIKit</code>を指定するが、UIKitフレームワークをリンクしているバイナリは<code>/bin</code>, <code>/sbin</code>, <code>/usr/libexec</code>配下などにもある。</p>
+
+<p>これを厳密にアプリケーションのみをターゲットにするなら下記のコードで<code>%init</code>を行うかどうかを制御すれば良い。</p>
+
+<pre><code>NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
+if ([bundlePath hasSuffix:@".app"]) {
+    // for application code.
+    %init;
+}
+</code></pre>
+
+<p>Available in iOS 2.0 and later.</p>
+</div>
+  
+  
+
+<footer>
+
+  
+
+<span class="byline author vcard">Posted by <span class="fn">r_plus</span></span>
+
+
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/mobilesubstrate/'>mobilesubstrate,</a>, <a class='category' href='/blog/categories/tweak/'>tweak</a>
+  
+</span>
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/index.html" data-via="r_plus" data-counturl="http://r-plus.github.io/index.html" >Tweet</a>
+  
+  
+  
+</div>
+
+</footer>
+
+    </article>
   
   
     <article>
@@ -872,94 +945,9 @@ debも置いてあります。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2013/07/25/test/">Test</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-25T20:22:00+09:00" pubdate data-updated="true">Jul 25<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>code test. <code>code</code></p>
-
-<pre><code>pre
-tag
-</code></pre>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>alloc
-</span><span class='line'>init</span></code></pre></td></tr></table></div></figure>
-
-
-<h1>h1</h1>
-
-<h2>h2</h2>
-
-<h3>h3</h3>
-
-<h4>h4</h4>
-
-<h4>h5</h4>
-
-<ul>
-<li>list</li>
-</ul>
-
-</div>
-  
-  
-
-<footer>
-
-  
-
-<span class="byline author vcard">Posted by <span class="fn">r_plus</span></span>
-
-
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/test/'>test</a>
-  
-</span>
-
-
-<div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/index.html" data-via="r_plus" data-counturl="http://r-plus.github.io/index.html" >Tweet</a>
-  
-  
-  
-</div>
-
-</footer>
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -985,6 +973,10 @@ tag
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/22/uikittagetutoniokeruyan-mi-naapplicationpan-ding/">UIKitターゲットにおける厳密なApplication判定</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/03/09/postnotification-with-object/">PostNotification With Object</a>
       </li>
     
@@ -1000,10 +992,6 @@ tag
         <a href="/blog/2013/12/11/aapulltorefreshwozuo-cheng-simasita/">AllAroundPullViewの後継、AAPullToRefreshを作成しました</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/12/07/file-extension-for-theos/">File Extension for Theos Logo.</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -1015,9 +1003,10 @@ tag
 <li class='category'><a href='/blog/categories/activator/'>activator (1)</a></li>
 <li class='category'><a href='/blog/categories/dev/'>dev (1)</a></li>
 <li class='category'><a href='/blog/categories/iproute2/'>iproute2 (1)</a></li>
+<li class='category'><a href='/blog/categories/mobilesubstrate-/'>mobilesubstrate, (1)</a></li>
 <li class='category'><a href='/blog/categories/test/'>test (2)</a></li>
 <li class='category'><a href='/blog/categories/theos/'>theos (1)</a></li>
-<li class='category'><a href='/blog/categories/tweak/'>tweak (3)</a></li>
+<li class='category'><a href='/blog/categories/tweak/'>tweak (4)</a></li>
 
 </ul>
 </section>
