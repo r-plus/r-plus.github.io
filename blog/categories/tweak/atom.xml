@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tweak | seekpoint]]></title>
   <link href="http://r-plus.github.io/blog/categories/tweak/atom.xml" rel="self"/>
   <link href="http://r-plus.github.io/"/>
-  <updated>2014-07-19T13:17:21+09:00</updated>
+  <updated>2014-07-19T13:20:21+09:00</updated>
   <id>http://r-plus.github.io/</id>
   <author>
     <name><![CDATA[r_plus]]></name>
@@ -18,7 +18,7 @@
     <link href="http://r-plus.github.io/blog/2014/07/19/imebian-nidui-ying-sitaswipeshiftcaret-1-dot-6-4/"/>
     <updated>2014-07-19T12:55:00+09:00</updated>
     <id>http://r-plus.github.io/blog/2014/07/19/imebian-nidui-ying-sitaswipeshiftcaret-1-dot-6-4</id>
-    <content type="html"><![CDATA[<p><img src="images/SSC164.gif" alt="SSC" /></p>
+    <content type="html"><![CDATA[<p><img src="/images/SSC164.gif" alt="SSC" /></p>
 
 <p>SwipeShiftCaret v1.6.4は<a href="https://github.com/r-plus/SwipeShiftCaret/tree/5b88777576293da2d3e306cda62c7797a5870844">v0.1</a>の頃からの課題だったIME変換中文字の移動に対応しました。(iOS 7+ですが)</p>
 
