@@ -4,7 +4,7 @@
   <title><![CDATA[seekpoint]]></title>
   <link href="http://r-plus.github.io/atom.xml" rel="self"/>
   <link href="http://r-plus.github.io/"/>
-  <updated>2014-06-22T21:35:35+09:00</updated>
+  <updated>2014-07-19T13:17:21+09:00</updated>
   <id>http://r-plus.github.io/</id>
   <author>
     <name><![CDATA[r_plus]]></name>
@@ -12,6 +12,19 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[IME変換中文字に対応したSwipeShiftCaret 1.6.4]]></title>
+    <link href="http://r-plus.github.io/blog/2014/07/19/imebian-nidui-ying-sitaswipeshiftcaret-1-dot-6-4/"/>
+    <updated>2014-07-19T12:55:00+09:00</updated>
+    <id>http://r-plus.github.io/blog/2014/07/19/imebian-nidui-ying-sitaswipeshiftcaret-1-dot-6-4</id>
+    <content type="html"><![CDATA[<p><img src="images/SSC164.gif" alt="SSC" /></p>
+
+<p>SwipeShiftCaret v1.6.4は<a href="https://github.com/r-plus/SwipeShiftCaret/tree/5b88777576293da2d3e306cda62c7797a5870844">v0.1</a>の頃からの課題だったIME変換中文字の移動に対応しました。(iOS 7+ですが)</p>
+
+<p>なお、変換中の文字付近をタップした際に出現する拡大ビューが表示されている場合は、iOSデフォルトの動作を優先します。(仕様)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[UIKitターゲットにおける厳密なApplication判定]]></title>
