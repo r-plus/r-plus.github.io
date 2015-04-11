@@ -4,7 +4,7 @@
   <title><![CDATA[seekpoint]]></title>
   <link href="http://r-plus.github.io/atom.xml" rel="self"/>
   <link href="http://r-plus.github.io/"/>
-  <updated>2014-07-19T13:20:19+09:00</updated>
+  <updated>2015-04-11T16:05:28+09:00</updated>
   <id>http://r-plus.github.io/</id>
   <author>
     <name><![CDATA[r_plus]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Private function test on Cycript.]]></title>
+    <link href="http://r-plus.github.io/blog/2015/04/11/private-function-test-on-cycript/"/>
+    <updated>2015-04-11T15:59:00+09:00</updated>
+    <id>http://r-plus.github.io/blog/2015/04/11/private-function-test-on-cycript</id>
+    <content type="html"><![CDATA[<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>i6:~ root# cycript -p profiled
+</span><span class='line'>cy# a = dlsym(RTLD_DEFAULT, "MKBDeviceGetGracePeriod")
+</span><span class='line'>0x18c9d1b64
+</span><span class='line'>cy# b=new Functor(a,'@')
+</span><span class='line'>0x18c9d1b64
+</span><span class='line'>cy# b()
+</span><span class='line'>@{"GracePeriod":2147483647}</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[IME変換中文字に対応したSwipeShiftCaret 1.6.4]]></title>

@@ -2,11 +2,11 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://r-plus.github.io/blog/2013/07/25/test/</loc>
-        <lastmod>2013-07-26T01:07:52+09:00</lastmod>
+        <lastmod>2013-07-26T00:36:19+09:00</lastmod>
     </url>
     <url>
         <loc>http://r-plus.github.io/blog/2013/07/26/yin-yue-si/</loc>
-        <lastmod>2013-07-26T01:07:52+09:00</lastmod>
+        <lastmod>2013-07-26T01:06:40+09:00</lastmod>
     </url>
     <url>
         <loc>http://r-plus.github.io/blog/2013/07/28/timestamp/</loc>
@@ -34,7 +34,7 @@
     </url>
     <url>
         <loc>http://r-plus.github.io/blog/2014/02/18/tip-of-depends-in-debian-package/</loc>
-        <lastmod>2014-02-18T21:16:05+09:00</lastmod>
+        <lastmod>2014-02-18T21:15:43+09:00</lastmod>
     </url>
     <url>
         <loc>http://r-plus.github.io/blog/2014/03/09/postnotification-with-object/</loc>
@@ -44,7 +44,7 @@
         <loc>
             http://r-plus.github.io/blog/2014/06/22/uikittagetutoniokeruyan-mi-naapplicationpan-ding/
         </loc>
-        <lastmod>2014-06-22T21:35:14+09:00</lastmod>
+        <lastmod>2014-06-22T21:33:43+09:00</lastmod>
     </url>
     <url>
         <loc>
@@ -53,12 +53,16 @@
         <lastmod>2014-07-19T13:19:52+09:00</lastmod>
     </url>
     <url>
+        <loc>http://r-plus.github.io/blog/2015/04/11/private-function-test-on-cycript/</loc>
+        <lastmod>2015-04-11T16:02:04+09:00</lastmod>
+    </url>
+    <url>
         <loc>http://r-plus.github.io/blog/archives/</loc>
-        <lastmod>2014-07-19T13:19:52+09:00</lastmod>
+        <lastmod>2015-04-11T16:02:04+09:00</lastmod>
     </url>
     <url>
         <loc>http://r-plus.github.io/</loc>
-        <lastmod>2014-07-19T13:19:52+09:00</lastmod>
+        <lastmod>2015-04-11T16:02:04+09:00</lastmod>
     </url>
     <url>
         <loc>http://r-plus.github.io/robots.txt</loc>

@@ -9,8 +9,18 @@
   <meta name="author" content="r_plus">
 
   
-  <meta name="description" content=" SwipeShiftCaret v1.6.4はv0.1の頃からの課題だったIME変換中文字の移動に対応しました。(iOS 7+ですが) なお、変換中の文字付近をタップした際に出現する拡大ビューが表示されている場合は、iOSデフォルトの動作を優先します。(仕様)
-">
+  <meta name="description" content="1
+2
+3
+4
+5
+6
+7
+i6:~ root# cycript -p profiled
+cy# a = dlsym(RTLD_DEFAULT, "MKBDeviceGetGracePeriod")
+0x18c9d1b64
+cy# b=new Functor(a,'@')
+0x18c9d1b64 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -75,6 +85,76 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2015/04/11/private-function-test-on-cycript/">Private Function Test on Cycript.</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-04-11T15:59:00+09:00" pubdate data-updated="true">Apr 11<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>i6:~ root# cycript -p profiled
+</span><span class='line'>cy# a = dlsym(RTLD_DEFAULT, "MKBDeviceGetGracePeriod")
+</span><span class='line'>0x18c9d1b64
+</span><span class='line'>cy# b=new Functor(a,'@')
+</span><span class='line'>0x18c9d1b64
+</span><span class='line'>cy# b()
+</span><span class='line'>@{"GracePeriod":2147483647}</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+<footer>
+
+  
+
+<span class="byline author vcard">Posted by <span class="fn">r_plus</span></span>
+
+
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/index.html" data-via="r_plus" data-counturl="http://r-plus.github.io/index.html" >Tweet</a>
+  
+  
+  
+</div>
+
+</footer>
+
+    </article>
   
   
     <article>
@@ -875,73 +955,6 @@ Cloakyは1.6.3からこれを使用してステータスバーアイコンのON/
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/blog/2013/07/28/timestamp/">TimeStamp</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-28T00:02:00+09:00" pubdate data-updated="true">Jul 28<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>最近終業時間をメモるためにカレンダーにその時間を登録しているので、そのショートカットとしてActivator用のtweakを作りました。</p>
-
-<p>TimeStamp <a href="https://github.com/r-plus/TimeStamp">https://github.com/r-plus/TimeStamp</a>   <br/>
-debも置いてあります。</p>
-
-<p>最近のgithubはrepo作成時にライセンス選ぶとライセンス本文ファイルとREADME.mdを生成してくれるんですね。ちなみにPublicDomainにしてみました。</p>
-</div>
-  
-  
-
-<footer>
-
-  
-
-<span class="byline author vcard">Posted by <span class="fn">r_plus</span></span>
-
-
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/activator/'>activator</a>, <a class='category' href='/blog/categories/tweak/'>tweak</a>
-  
-</span>
-
-
-<div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/index.html" data-via="r_plus" data-counturl="http://r-plus.github.io/index.html" >Tweet</a>
-  
-  
-  
-</div>
-
-</footer>
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -970,6 +983,10 @@ debも置いてあります。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/04/11/private-function-test-on-cycript/">Private Function Test on Cycript.</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/07/19/imebian-nidui-ying-sitaswipeshiftcaret-1-dot-6-4/">IME変換中文字に対応したSwipeShiftCaret 1.6.4</a>
       </li>
     
@@ -983,10 +1000,6 @@ debも置いてあります。</p>
     
       <li class="post">
         <a href="/blog/2014/02/18/tip-of-depends-in-debian-package/">Tip of Depends in Debian Package</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/01/26/sleipnizer-4-dot-1/">Sleipnizer v4.1 Overview</a>
       </li>
     
   </ul>
@@ -1014,7 +1027,7 @@ debも置いてあります。</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - r_plus -
+  Copyright &copy; 2015 - r_plus -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
