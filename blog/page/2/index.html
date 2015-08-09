@@ -9,7 +9,10 @@
   <meta name="author" content="r_plus">
 
   
-  <meta name="description" content="最近終業時間をメモるためにカレンダーにその時間を登録しているので、そのショートカットとしてActivator用のtweakを作りました。 TimeStamp https://github.com/r-plus/TimeStamp debも置いてあります。 &hellip;">
+  <meta name="description" content="メンテナンスされておらず、最早未来のないnet-toolsの代替であるiproute2での静的ルーティングの設定。 ■追加 1
+2
+route add -net 192.168.33.128/25 gw 192.168.10.1 eth0
+ip route add 192.168.33.128/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,6 +77,88 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2013/08/20/iproute2-instead-of-net-tools/">Iproute2 Instead of Net-tools</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-20T23:00:00+09:00" pubdate data-updated="true">Aug 20<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>メンテナンスされておらず、最早未来のないnet-toolsの代替であるiproute2での静的ルーティングの設定。</p>
+
+<p>■追加</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>route add -net 192.168.33.128/25 gw 192.168.10.1 eth0
+</span><span class='line'>ip route add 192.168.33.128/25 via 192.168.10.1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>■削除</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>route del -net 192.168.33.128/25 gw 192.168.10.1 eth0
+</span><span class='line'>ip route del 192.168.33.128
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+<footer>
+
+  
+
+<span class="byline author vcard">Posted by <span class="fn">r_plus</span></span>
+
+
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/iproute2/'>iproute2</a>
+  
+</span>
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/blog/page/2/index.html" data-via="r_plus" data-counturl="http://r-plus.github.io/blog/page/2/index.html" >Tweet</a>
+  
+  
+  
+</div>
+
+</footer>
+
+    </article>
   
   
     <article>
@@ -327,6 +412,10 @@ tag
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/08/09/weak-link-to-library/">Weak Link to Library.</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/04/11/private-function-test-on-cycript/">Private Function Test on Cycript.</a>
       </li>
     
@@ -342,10 +431,6 @@ tag
         <a href="/blog/2014/03/09/postnotification-with-object/">PostNotification With Object</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/02/18/tip-of-depends-in-debian-package/">Tip of Depends in Debian Package</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -359,7 +444,7 @@ tag
 <li class='category'><a href='/blog/categories/iproute2/'>iproute2 (1)</a></li>
 <li class='category'><a href='/blog/categories/mobilesubstrate/'>mobilesubstrate (1)</a></li>
 <li class='category'><a href='/blog/categories/test/'>test (2)</a></li>
-<li class='category'><a href='/blog/categories/theos/'>theos (1)</a></li>
+<li class='category'><a href='/blog/categories/theos/'>theos (2)</a></li>
 <li class='category'><a href='/blog/categories/tweak/'>tweak (5)</a></li>
 
 </ul>

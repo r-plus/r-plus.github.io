@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>IME変換中文字に対応したSwipeShiftCaret 1.6.4 - seekpoint</title>
+  <title>weak link to library. - seekpoint</title>
   <meta name="author" content="r_plus">
 
   
-  <meta name="description" content=" SwipeShiftCaret v1.6.4はv0.1の頃からの課題だったIME変換中文字の移動に対応しました。(iOS 7+ですが) なお、変換中の文字付近をタップした際に出現する拡大ビューが表示されている場合は、iOSデフォルトの動作を優先します。(仕様)
-">
+  <meta name="description" content="activatorへのリンクをOptionalにしてdlopenエラーが出ないようにする時のフラグ。フレームワークの場合に利用する-weak_frameworkは必要ないが、ライブラリの場合はフルパスを指定する必要がある。 XXX_LDFLAGS = -weak_library $(THEOS)/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://r-plus.github.io/blog/2014/07/19/imebian-nidui-ying-sitaswipeshiftcaret-1-dot-6-4/">
+  <link rel="canonical" href="http://r-plus.github.io/blog/2015/08/09/weak-link-to-library/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <!-- for table extension for markdown -->
@@ -79,7 +78,7 @@
   <header>
     
       
-        <h1 class="entry-title">IME変換中文字に対応したSwipeShiftCaret 1.6.4</h1>
+        <h1 class="entry-title">Weak Link to Library.</h1>
       
     
     
@@ -96,18 +95,26 @@
   
 
 
-<time datetime="2014-07-19T12:55:00+09:00" pubdate data-updated="true">Jul 19<span>th</span>, 2014</time>
+<time datetime="2015-08-09T11:16:00+09:00" pubdate data-updated="true">Aug 9<span>th</span>, 2015</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><img src="/images/SSC164.gif" alt="SSC" /></p>
+<div class="entry-content"><p>activatorへのリンクをOptionalにしてdlopenエラーが出ないようにする時のフラグ。フレームワークの場合に利用する<code>-weak_framework</code>は必要ないが、ライブラリの場合はフルパスを指定する必要がある。</p>
 
-<p>SwipeShiftCaret v1.6.4は<a href="https://github.com/r-plus/SwipeShiftCaret/tree/5b88777576293da2d3e306cda62c7797a5870844">v0.1</a>の頃からの課題だったIME変換中文字の移動に対応しました。(iOS 7+ですが)</p>
+<pre><code>XXX_LDFLAGS = -weak_library $(THEOS)/lib/libactivator.dylib
+</code></pre>
 
-<p>なお、変換中の文字付近をタップした際に出現する拡大ビューが表示されている場合は、iOSデフォルトの動作を優先します。(仕様)</p>
+<p>なお、PATHはldがちゃんと/usr/libにしてくれます。</p>
+
+<p>内部でリンクされているかどうかはこんな感じで</p>
+
+<pre><code>if (%c(LAActivator)) {
+    // code.
+}
+</code></pre>
 </div>
 
 <footer>
@@ -120,14 +127,14 @@
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/tweak/'>tweak</a>
+    <a class='category' href='/blog/categories/theos/'>theos</a>
   
 </span>
 
 
 <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/blog/2014/07/19/imebian-nidui-ying-sitaswipeshiftcaret-1-dot-6-4/" data-via="r_plus" data-counturl="http://r-plus.github.io/blog/2014/07/19/imebian-nidui-ying-sitaswipeshiftcaret-1-dot-6-4/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/blog/2015/08/09/weak-link-to-library/" data-via="r_plus" data-counturl="http://r-plus.github.io/blog/2015/08/09/weak-link-to-library/" >Tweet</a>
   
   
   
@@ -154,12 +161,12 @@
   
 
 
-<time datetime="2014-07-19T12:55:00+09:00" pubdate data-updated="true">Jul 19<span>th</span>, 2014</time>
+<time datetime="2015-08-09T11:16:00+09:00" pubdate data-updated="true">Aug 9<span>th</span>, 2015</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/tweak/'>tweak</a>
+    <a class='category' href='/blog/categories/theos/'>theos</a>
   
 </span>
 
@@ -168,7 +175,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/blog/2014/07/19/imebian-nidui-ying-sitaswipeshiftcaret-1-dot-6-4/" data-via="r_plus" data-counturl="http://r-plus.github.io/blog/2014/07/19/imebian-nidui-ying-sitaswipeshiftcaret-1-dot-6-4/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/blog/2015/08/09/weak-link-to-library/" data-via="r_plus" data-counturl="http://r-plus.github.io/blog/2015/08/09/weak-link-to-library/" >Tweet</a>
   
   
   
@@ -177,10 +184,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left articlenav" href="/blog/2014/06/22/uikittagetutoniokeruyan-mi-naapplicationpan-ding/" title="Previous Post: UIKitターゲットにおける厳密なApplication判定">&laquo; UIKitターゲットにおける厳密なApplication判定</a>
+        <a class="basic-alignment left articlenav" href="/blog/2015/04/11/private-function-test-on-cycript/" title="Previous Post: Private function test on Cycript.">&laquo; Private function test on Cycript.</a>
       
-      
-        <a class="basic-alignment right articlenav" href="/blog/2015/04/11/private-function-test-on-cycript/" title="Next Post: Private function test on Cycript.">Private function test on Cycript. &raquo;</a>
       
     </p>
   </footer>
