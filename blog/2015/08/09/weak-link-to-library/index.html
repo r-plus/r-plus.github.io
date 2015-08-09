@@ -9,7 +9,7 @@
   <meta name="author" content="r_plus">
 
   
-  <meta name="description" content="activatorへのリンクをOptionalにしてdlopenエラーが出ないようにする時のフラグ。フレームワークの場合に利用する-weak_frameworkは必要ないが、ライブラリの場合はフルパスを指定する必要がある。 XXX_LDFLAGS = -weak_library $(THEOS)/ &hellip;">
+  <meta name="description" content="activatorへのリンクをOptionalにしてdlopenエラーが出ないようにする時のフラグ。フレームワークの場合に利用する-weak_frameworkの場合はフルパスは必要ないが、ライブラリの場合はフルパスを指定する必要がある。 XXX_LDFLAGS = -weak_library &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -102,7 +102,7 @@
   </header>
 
 
-<div class="entry-content"><p>activatorへのリンクをOptionalにしてdlopenエラーが出ないようにする時のフラグ。フレームワークの場合に利用する<code>-weak_framework</code>は必要ないが、ライブラリの場合はフルパスを指定する必要がある。</p>
+<div class="entry-content"><p>activatorへのリンクをOptionalにしてdlopenエラーが出ないようにする時のフラグ。フレームワークの場合に利用する<code>-weak_framework</code>の場合はフルパスは必要ないが、ライブラリの場合はフルパスを指定する必要がある。</p>
 
 <pre><code>XXX_LDFLAGS = -weak_library $(THEOS)/lib/libactivator.dylib
 </code></pre>
