@@ -4,7 +4,7 @@
   <title><![CDATA[seekpoint]]></title>
   <link href="http://r-plus.github.io/atom.xml" rel="self"/>
   <link href="http://r-plus.github.io/"/>
-  <updated>2015-08-09T11:37:41+09:00</updated>
+  <updated>2015-09-27T18:47:49+09:00</updated>
   <id>http://r-plus.github.io/</id>
   <author>
     <name><![CDATA[r_plus]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Respring via posix_spawn]]></title>
+    <link href="http://r-plus.github.io/blog/2015/09/27/respring-via-posix-spawn/"/>
+    <updated>2015-09-27T18:30:00+09:00</updated>
+    <id>http://r-plus.github.io/blog/2015/09/27/respring-via-posix-spawn</id>
+    <content type="html"><![CDATA[<p>iOS 8から<code>system()</code>がdeprecatedになりました。</p>
+
+<pre><code>error: 'system' is deprecated: first deprecated in iOS 8.0 - Use posix_spawn APIs instead.
+</code></pre>
+
+<p>で、<code>posix_spawn()</code>使えと。こっちもiOS 2から使えるようなのでこの際バージョン切り分けではなくこっちを使うのがいいでしょう。
+といっても設定からRespringするぐらいにしか使わないのでエラーハンドリングとか軒並みNULLで放棄してこんな感じで。</p>
+
+<pre><code>#include &lt;spawn.h&gt; 
+...
+char *command[] = {
+    "killall",
+    "SpringBoard",
+    NULL
+};
+posix_spawn(NULL, command[0], NULL, NULL, command, NULL);
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[weak link to library.]]></title>

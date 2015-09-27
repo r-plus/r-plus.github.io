@@ -5,14 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>iproute2 instead of net-tools - seekpoint</title>
+  <title>Respring via posix_spawn - seekpoint</title>
   <meta name="author" content="r_plus">
 
   
-  <meta name="description" content="メンテナンスされておらず、最早未来のないnet-toolsの代替であるiproute2での静的ルーティングの設定。 ■追加 1
-2
-route add -net 192.168.33.128/25 gw 192.168.10.1 eth0
-ip route add 192.168.33.128/ &hellip;">
+  <meta name="description" content="iOS 8からsystem()がdeprecatedになりました。 error: 'system' is deprecated: first deprecated in iOS 8.0 - Use posix_spawn APIs instead. で、posix_spawn()使えと。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +18,7 @@ ip route add 192.168.33.128/ &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://r-plus.github.io/blog/2013/08/20/iproute2-instead-of-net-tools/">
+  <link rel="canonical" href="http://r-plus.github.io/blog/2015/09/27/respring-via-posix-spawn/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <!-- for table extension for markdown -->
@@ -81,7 +78,7 @@ ip route add 192.168.33.128/ &hellip;">
   <header>
     
       
-        <h1 class="entry-title">Iproute2 Instead of Net-tools</h1>
+        <h1 class="entry-title">Respring via Posix_spawn</h1>
       
     
     
@@ -98,34 +95,30 @@ ip route add 192.168.33.128/ &hellip;">
   
 
 
-<time datetime="2013-08-20T23:00:00+09:00" pubdate data-updated="true">Aug 20<span>th</span>, 2013</time>
+<time datetime="2015-09-27T18:30:00+09:00" pubdate data-updated="true">Sep 27<span>th</span>, 2015</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>メンテナンスされておらず、最早未来のないnet-toolsの代替であるiproute2での静的ルーティングの設定。</p>
+<div class="entry-content"><p>iOS 8から<code>system()</code>がdeprecatedになりました。</p>
 
-<p>■追加</p>
+<pre><code>error: 'system' is deprecated: first deprecated in iOS 8.0 - Use posix_spawn APIs instead.
+</code></pre>
 
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>route add -net 192.168.33.128/25 gw 192.168.10.1 eth0
-</span><span class='line'>ip route add 192.168.33.128/25 via 192.168.10.1
-</span></code></pre></td></tr></table></div></figure>
+<p>で、<code>posix_spawn()</code>使えと。こっちもiOS 2から使えるようなのでこの際バージョン切り分けではなくこっちを使うのがいいでしょう。
+といっても設定からRespringするぐらいにしか使わないのでエラーハンドリングとか軒並みNULLで放棄してこんな感じで。</p>
 
-
-<p>■削除</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>route del -net 192.168.33.128/25 gw 192.168.10.1 eth0
-</span><span class='line'>ip route del 192.168.33.128
-</span></code></pre></td></tr></table></div></figure>
-
-
-
+<pre><code>#include &lt;spawn.h&gt; 
+...
+char *command[] = {
+    "killall",
+    "SpringBoard",
+    NULL
+};
+posix_spawn(NULL, command[0], NULL, NULL, command, NULL);
+</code></pre>
 </div>
 
 <footer>
@@ -136,16 +129,10 @@ ip route add 192.168.33.128/ &hellip;">
 
 
 
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/iproute2/'>iproute2</a>
-  
-</span>
-
 
 <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/blog/2013/08/20/iproute2-instead-of-net-tools/" data-via="r_plus" data-counturl="http://r-plus.github.io/blog/2013/08/20/iproute2-instead-of-net-tools/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/blog/2015/09/27/respring-via-posix-spawn/" data-via="r_plus" data-counturl="http://r-plus.github.io/blog/2015/09/27/respring-via-posix-spawn/" >Tweet</a>
   
   
   
@@ -172,21 +159,15 @@ ip route add 192.168.33.128/ &hellip;">
   
 
 
-<time datetime="2013-08-20T23:00:00+09:00" pubdate data-updated="true">Aug 20<span>th</span>, 2013</time>
+<time datetime="2015-09-27T18:30:00+09:00" pubdate data-updated="true">Sep 27<span>th</span>, 2015</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/iproute2/'>iproute2</a>
-  
-</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/blog/2013/08/20/iproute2-instead-of-net-tools/" data-via="r_plus" data-counturl="http://r-plus.github.io/blog/2013/08/20/iproute2-instead-of-net-tools/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/blog/2015/09/27/respring-via-posix-spawn/" data-via="r_plus" data-counturl="http://r-plus.github.io/blog/2015/09/27/respring-via-posix-spawn/" >Tweet</a>
   
   
   
@@ -195,10 +176,8 @@ ip route add 192.168.33.128/ &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left articlenav" href="/blog/2013/07/28/timestamp/" title="Previous Post: TimeStamp">&laquo; TimeStamp</a>
+        <a class="basic-alignment left articlenav" href="/blog/2015/08/09/weak-link-to-library/" title="Previous Post: weak link to library.">&laquo; weak link to library.</a>
       
-      
-        <a class="basic-alignment right articlenav" href="/blog/2013/10/19/travis-for-theos/" title="Next Post: Travis for THEOS">Travis for THEOS &raquo;</a>
       
     </p>
   </footer>

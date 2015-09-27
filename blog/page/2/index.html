@@ -9,10 +9,7 @@
   <meta name="author" content="r_plus">
 
   
-  <meta name="description" content="メンテナンスされておらず、最早未来のないnet-toolsの代替であるiproute2での静的ルーティングの設定。 ■追加 1
-2
-route add -net 192.168.33.128/25 gw 192.168.10.1 eth0
-ip route add 192.168.33.128/ &hellip;">
+  <meta name="description" content="普通にXcodeのプロジェクトに対してTravis CIでCIしているケースはよく見ますが、theos向けのものは見たことがないのでやってみました。 サンプルプロジェクト SwipeShiftCaret を使いました。 TravisのMac &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +74,93 @@ ip route add 192.168.33.128/ &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/blog/2013/10/19/travis-for-theos/">Travis for THEOS</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-19T11:25:00+09:00" pubdate data-updated="true">Oct 19<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>普通にXcodeのプロジェクトに対してTravis CIでCIしているケースはよく見ますが、theos向けのものは見たことがないのでやってみました。</p>
+
+<h3>サンプルプロジェクト</h3>
+
+<p><a href="https://github.com/r-plus/SwipeShiftCaret">SwipeShiftCaret</a> を使いました。</p>
+
+<p>TravisのMac VMは<code>homebrew</code>が使えますので<code>dpkg</code>をインストールし、theosを配備してやればビルド環境として整います。
+タイミングはapt-get等で環境をととのえるフェーズとして<code>before_install</code>があるため、そこで配備します。git submodule等があればそちらのコードもこのフェーズで取得すると良いでしょう(git cloneではサブモジュールまで取得されません)。</p>
+
+<p>theosの配備についてはセットアップ及びライブラリ・ヘッダー更新用のスクリプトをTravis対応用にカレントディレクトリに展開するよう修正したものを使いました。</p>
+
+<pre><code>before_install:
+  - brew update
+  - brew install dpkg
+  - curl https://raw.github.com/r-plus/dotfiles/master/install_theos.sh | bash
+</code></pre>
+
+<p>そして本命のビルドはmakeを流せば良いため</p>
+
+<pre><code>script:
+  - make
+</code></pre>
+
+<p>これでTravis上でビルド可能です。TravisとのServiceHookを有効にしたリポジトリで、これらを記述した<code>.travis.yml</code>をプッシュすれば以後はプッシュ毎、PullReq毎にCIが走ってくれます。</p>
+
+<p>リターンコードが0であればSuccessになり、晴れて <a href="https://travis-ci.org/r-plus/SwipeShiftCaret.png?branch=master">https://travis-ci.org/r-plus/SwipeShiftCaret.png?branch=master</a> のアイコン <img src="https://travis-ci.org/r-plus/SwipeShiftCaret.png?branch=master" alt="" /> がPassingになります、READMEにでも貼っておきましょう。</p>
+</div>
+  
+  
+
+<footer>
+
+  
+
+<span class="byline author vcard">Posted by <span class="fn">r_plus</span></span>
+
+
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/travis-ci/'>Travis-CI</a>
+  
+</span>
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://r-plus.github.io/blog/page/2/index.html" data-via="r_plus" data-counturl="http://r-plus.github.io/blog/page/2/index.html" >Tweet</a>
+  
+  
+  
+</div>
+
+</footer>
+
+    </article>
   
   
     <article>
@@ -412,6 +496,10 @@ tag
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/09/27/respring-via-posix-spawn/">Respring via Posix_spawn</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/08/09/weak-link-to-library/">Weak Link to Library.</a>
       </li>
     
@@ -425,10 +513,6 @@ tag
     
       <li class="post">
         <a href="/blog/2014/06/22/uikittagetutoniokeruyan-mi-naapplicationpan-ding/">UIKitターゲットにおける厳密なApplication判定</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/03/09/postnotification-with-object/">PostNotification With Object</a>
       </li>
     
   </ul>
